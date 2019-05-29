@@ -4,6 +4,7 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'consts.dart';
 import 'results_page.dart';
+import 'bottom_button.dart';
 
 enum Gender { male, female }
 Color maleCardColour = kInactiveCardColour;
@@ -191,19 +192,16 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             )),
-            GestureDetector(
+            BottomButton(
+              buttonText: 'Calculate',
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultsPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(),
+                  ),
+                );
               },
-              child: Container(
-                child: Center(
-                    child: Text('Calculate', style: kLargeButtonTextStyle)),
-                color: kBottomCardColour,
-                margin: EdgeInsets.only(top: 10.0),
-                width: double.infinity,
-                height: kBottomContainerHeight,
-              ),
             )
           ],
         ));
