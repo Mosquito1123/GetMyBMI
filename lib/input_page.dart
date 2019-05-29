@@ -9,6 +9,9 @@ const inactiveCardColour = Color(0xFF111328);
 const bottomCardColour = Color(0xFFEB1555);
 
 enum Gender { male, female }
+Color maleCardColour = inactiveCardColour;
+Color femaleCardColour = inactiveCardColour;
+Gender selectedGender = null;
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,28 +19,6 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColour = inactiveCardColour;
-  Color femaleCardColour = inactiveCardColour;
-
-  void updateColour(Gender gender) {
-    if (gender == Gender.male) {
-      if (maleCardColour == inactiveCardColour) {
-        maleCardColour = activeCardColour;
-        femaleCardColour = inactiveCardColour;
-      } else {
-        maleCardColour = inactiveCardColour;
-      }
-    }
-    if (gender == Gender.female) {
-      if (femaleCardColour == inactiveCardColour) {
-        femaleCardColour = activeCardColour;
-        maleCardColour = inactiveCardColour;
-      } else {
-        femaleCardColour = inactiveCardColour;
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +34,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColour(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReusableCard(
-                      cardColour: maleCardColour,
+                      cardColour: selectedGender == Gender.male
+                          ? activeCardColour
+                          : inactiveCardColour,
                       cardChild: IconContent(
                         icon: FontAwesomeIcons.male,
                         iconText: 'Male',
@@ -69,11 +52,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColour(Gender.female);
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReusableCard(
-                      cardColour: femaleCardColour,
+                      cardColour: selectedGender == Gender.female
+                          ? activeCardColour
+                          : inactiveCardColour,
                       cardChild: IconContent(
                         icon: FontAwesomeIcons.female,
                         iconText: 'Female',
