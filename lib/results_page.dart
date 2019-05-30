@@ -4,6 +4,17 @@ import 'reusable_card.dart';
 import 'bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.bmiResult,
+      @required this.resultText,
+      @required this.interpretation,
+      @required this.icon,
+      @required this.age});
+
+  final String bmiResult, resultText, interpretation;
+  final IconData icon;
+  final int age;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +32,23 @@ class ResultsPage extends StatelessWidget {
               child: Text('Your Result', style: kTitleTextStyle),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                size: 80.0,
+              ),
+              SizedBox(width: 10.0),
+              Text(
+                'Age: ' + age.toString(),
+                style: TextStyle(fontSize: 30.0),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
           Expanded(
               flex: 5,
               child: ReusableCard(
@@ -30,15 +58,15 @@ class ResultsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Normal',
+                      resultText,
                       style: kResultTextStyle,
                     ),
                     Text(
-                      '18.3',
+                      bmiResult,
                       style: kBMITextStyle,
                     ),
                     Text(
-                      'Your BMI result is quite low, you should eat more',
+                      interpretation,
                       style: kBodyTextStyle,
                       textAlign: TextAlign.center,
                     ),
